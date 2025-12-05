@@ -63,7 +63,10 @@ fun splitInputByBlankLine(input: List<String>): Pair<List<String>, List<String>>
     return first to second
 }
 
-
+fun String.toLongRange(delimiter: String = "-"): LongRange {
+    val (a, b) = split(delimiter).map { it.toLong() }
+    return a..b
+}
 
 
 /**

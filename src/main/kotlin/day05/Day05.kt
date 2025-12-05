@@ -1,21 +1,18 @@
-package day05
+package day05_backup
 
 import println
 import readInput
 import splitInputByBlankLine
+import toLongRange
 
-private val day = "day05"
+private val day = "day05_backup"
 fun main() {
     
-   
     fun part1(input: List<String>): Long {
         var count = 0L
         val (rangesBlock, numbersBlock) = splitInputByBlankLine(input)
         
-        val ranges = rangesBlock.map { line ->
-            val (a, b) = line.split("-").map { it.toLong() }
-            a..b
-        }
+        val ranges = rangesBlock.map { it.toLongRange() }
         
         numbersBlock.map { it.toLong() }.forEach { number ->
             if (ranges.any { it.contains(number) }) count++
@@ -28,10 +25,7 @@ fun main() {
         var count = 0L
         val (rangesBlock, _) = splitInputByBlankLine(input)
         
-        val ranges = rangesBlock.map { line ->
-            val (a, b) = line.split("-").map { it.toLong() }
-            a..b
-        }
+        val ranges = rangesBlock.map { it.toLongRange() }
         val sortedRanges = ranges.sortedBy { it.first }
         
         var curStart = sortedRanges.first().first
@@ -52,7 +46,7 @@ fun main() {
         count += (curEnd - curStart + 1)
         return count
     }
-
+    
     val testInput = readInput("$day/test")
     check(part1(testInput) == 3L)
     check(part2(testInput) == 14L)

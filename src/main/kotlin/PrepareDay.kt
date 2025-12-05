@@ -7,6 +7,7 @@ import java.nio.file.Path
 import java.time.Duration
 
 private val day = null
+private val year = 2025
 
 fun main(args: Array<String>) {
     val options = parseArgs(args.toList())
@@ -74,10 +75,10 @@ private fun ensureInputFile(inputFile: Path) {
 }
 
 private fun downloadInput(dayNumber: Int, session: String, targetFile: Path) {
-    val url = URI("https://adventofcode.com/2025/day/$dayNumber/input")
+    val url = URI("https://adventofcode.com/$year/day/$dayNumber/input")
     val request = HttpRequest.newBuilder(url)
         .header("Cookie", "session=$session")
-        .header("User-Agent", "github.com/oliverbenelli/aoc2025 prepare-day script")
+        .header("User-Agent", "github.com/allanbenelli/aoc$year prepare-day script")
         .timeout(Duration.ofSeconds(15))
         .GET()
         .build()
@@ -118,8 +119,8 @@ private fun dayTemplate(paddedDay: String) = """
         }
 
         val testInput = readInput("${'$'}day/test")
-        //check(part1(testInput) == 3L)
-        //check(part2(testInput) == 14L)
+        //check(part1(testInput) == 0L)
+        //check(part2(testInput) == 0L)
         
         val input = readInput("${'$'}day/input")
         part1(input).println()
