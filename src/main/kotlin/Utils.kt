@@ -54,6 +54,15 @@ data class Point(val x: Int, val y: Int) {
     fun manhattanDistance(other: Point) = abs(x - other.x) + abs(y - other.y)
 }
 
+fun splitInputByBlankLine(input: List<String>): Pair<List<String>, List<String>> {
+    val emptyIndex = input.indexOf("")
+    
+    val first = input.subList(0, emptyIndex)
+    val second = input.subList(emptyIndex + 1, input.size)
+    
+    return first to second
+}
+
 
 
 

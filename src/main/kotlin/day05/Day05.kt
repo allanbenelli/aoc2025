@@ -2,23 +2,15 @@ package day05
 
 import println
 import readInput
+import splitInputByBlankLine
 
 private val day = "day05"
 fun main() {
     
-    fun splitInput(input: List<String>): Pair<List<String>, List<String>> {
-        val emptyIndex = input.indexOf("")
-        
-        val first = input.subList(0, emptyIndex)
-        val second = input.subList(emptyIndex + 1, input.size)
-        
-        return first to second
-    }
-
-    
+   
     fun part1(input: List<String>): Long {
         var count = 0L
-        val (rangesBlock, numbersBlock) = splitInput(input)
+        val (rangesBlock, numbersBlock) = splitInputByBlankLine(input)
         
         val ranges = rangesBlock.map { line ->
             val (a, b) = line.split("-").map { it.toLong() }
@@ -34,7 +26,7 @@ fun main() {
     
     fun part2(input: List<String>): Long {
         var count = 0L
-        val (rangesBlock, _) = splitInput(input)
+        val (rangesBlock, _) = splitInputByBlankLine(input)
         
         val ranges = rangesBlock.map { line ->
             val (a, b) = line.split("-").map { it.toLong() }
