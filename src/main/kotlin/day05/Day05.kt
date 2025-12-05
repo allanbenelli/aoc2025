@@ -1,11 +1,11 @@
-package day05_backup
+package day05
 
 import println
 import readInput
 import splitInputByBlankLine
 import toLongRange
 
-private val day = "day05_backup"
+private val day = "day05"
 fun main() {
     
     fun part1(input: List<String>): Long {
@@ -26,23 +26,23 @@ fun main() {
         val (rangesBlock, _) = splitInputByBlankLine(input)
         
         val ranges = rangesBlock.map { it.toLongRange() }
-        val sortedRanges = ranges.sortedBy { it.first }
+        
+        val sortedRanges = ranges.toMutableSet().sortedBy { it.first }
         
         var curStart = sortedRanges.first().first
         var curEnd = sortedRanges.first().last
         
-        for (first in sortedRanges.drop(1)) {
-            if (first.first <= curEnd + 1) { // overlap -> extend
-                curEnd = maxOf(curEnd, first.last)
+        sortedRanges.forEach { cur ->
+            if (cur.first <= curEnd + 1) {
+                curEnd = maxOf(curEnd, cur.last)
             } else {
-                // sum up
                 count += (curEnd - curStart + 1)
-                curStart = first.first
-                curEnd = first.last
+                curStart = cur.first
+                curEnd = cur.last
             }
+            
         }
-        
-        // last
+        // add last
         count += (curEnd - curStart + 1)
         return count
     }
