@@ -68,6 +68,18 @@ fun String.toLongRange(delimiter: String = "-"): LongRange {
     return a..b
 }
 
+fun <T> List<List<T>>.transpose(): List<List<T>> {
+    val transposed = mutableListOf<List<T>>()
+    for (i in first().indices) {
+        val col: MutableList<T> = ArrayList()
+        forEach { row ->
+            col.add(row[i])
+        }
+        transposed.add(col)
+    }
+    return transposed
+}
+
 
 /**
  * Converts string to md5 hash.
