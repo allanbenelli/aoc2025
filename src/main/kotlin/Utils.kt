@@ -3,6 +3,7 @@ import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readText
 import kotlin.math.abs
+import kotlin.math.sqrt
 
 /**
  * Reads lines from the given input txt file.
@@ -92,3 +93,38 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+
+data class Point3D(val x: Long, val y: Long, val z: Long) {
+    fun distTo(other: Point3D): Double = sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y) + (z - other.z) * (z - other.z).toDouble())
+}
+
+class UnionFind(n: Int) {
+    private val parent = IntArray(n) { it }
+    private val size = LongArray(n) { 1L }
+    
+    fun find(a: Int): Int {
+        if (parent[a] != a) parent[a] = find(parent[a])
+        return parent[a]
+    }
+    
+    fun union(a: Int, b: Int): Boolean {
+        var ra = find(a)
+        var rb = find(b)
+        if (ra == rb) return false
+        
+        if (size[ra] < size[rb]) {
+            val t = ra; ra = rb; rb = t
+        }
+        
+        parent[rb] = ra
+        size[ra] += size[rb]
+        return true
+    }
+    
+    fun componentSizes(): List<Long> {
+        return parent.indices
+            .filter { parent[it] == it }
+            .map { size[it] }
+    }
+}
