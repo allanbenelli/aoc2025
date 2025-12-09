@@ -1,6 +1,11 @@
 package day07
 
 import Point
+import down
+import downLeft
+import downRight
+import getCols
+import getRows
 import println
 import readInput
 
@@ -8,11 +13,7 @@ private val day = "day07"
 fun main() {
     
     fun inBounds(pos: Point, grid: List<String>) = pos.x in grid.indices && pos.y in grid[0].indices
-    fun List<String>.getCols() = this[0].length
-    fun List<String>.getRows() = this.size
-    fun Point.down() = Point(x + 1, y)
-    fun Point.downLeft() = Point(x + 1, y - 1)
-    fun Point.downRight() = Point(x + 1, y + 1)
+
     
     fun splits(
         grid: List<String>, pos: Point, visited: MutableSet<Point> = mutableSetOf()

@@ -128,3 +128,14 @@ class UnionFind(n: Int) {
             .map { size[it] }
     }
 }
+
+fun List<String>.getCols() = this[0].length
+fun List<String>.getRows() = this.size
+fun Point.down() = Point(x + 1, y)
+fun Point.downLeft() = Point(x + 1, y - 1)
+fun Point.downRight() = Point(x + 1, y + 1)
+fun Point.up() = Point(x - 1, y)
+fun Point.left() = Point(x , y - 1)
+fun Point.right() = Point(x , y + 1)
+fun Point.upLeft() = Point(x - 1, y - 1)
+fun Point.upRight() = Point(x - 1, y + 1)
